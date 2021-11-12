@@ -1,13 +1,13 @@
 import React from "react";
-import UserContextProvider from "./context";
+import Lang from "./context";
 import Screen from "./Screen";
+import translations from "./translations";
 
-function App() {
-  return (
-    <UserContextProvider>
-      <Screen />
-    </UserContextProvider>
-  );
-}
+const App = () => {
+  return;
+  <Lang defaultLang="en" translations={translations}>
+    <Screen />
+  </Lang>;
+};
 
 export default App;
