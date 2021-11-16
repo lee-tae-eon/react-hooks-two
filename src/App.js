@@ -15,9 +15,11 @@ function reducer(state, action) {
         toDos: [...state.toDos, { text: action.payLoad, id: uuidv4() }],
       };
     case DEL:
-      return {};
+      return {
+        toDos: state.toDos.filter((toDo) => action.payLoad !== toDo.id),
+      };
     default:
-      throw new Error();
+      return;
   }
 }
 
@@ -54,7 +56,9 @@ const App = () => {
         {state.toDos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.text}</span>
-            <button>❌</button>
+            <button onClick={() => dispatch({ type: DEL, payLoad: todo.id })}>
+              ❌
+            </button>
           </li>
         ))}
       </ul>
