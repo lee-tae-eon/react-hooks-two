@@ -1,27 +1,5 @@
 import React, { useReducer, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
-const initialState = {
-  toDos: [],
-};
-
-const ADD = "add";
-const DEL = "del";
-
-function reducer(state, action) {
-  switch (action.type) {
-    case ADD:
-      return {
-        toDos: [...state.toDos, { text: action.payLoad, id: uuidv4() }],
-      };
-    case DEL:
-      return {
-        toDos: state.toDos.filter((toDo) => action.payLoad !== toDo.id),
-      };
-    default:
-      return;
-  }
-}
+import reducer, { ADD, COMPLETE, DEL, initialState } from "./reducer";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -56,11 +34,34 @@ const App = () => {
         {state.toDos.map((todo) => (
           <li key={todo.id}>
             <span>{todo.text}</span>
-            <button onClick={() => dispatch({ type: DEL, payLoad: todo.id })}>
+            <span onClick={() => dispatch({ type: DEL, payLoad: todo.id })}>
               ❌
-            </button>
+            </span>
+            <span
+              onClick={() => dispatch({ type: COMPLETE, payLoad: todo.id })}
+            >
+              ✅
+            </span>
           </li>
         ))}
+      </ul>
+      <ul>
+        {state.completed.length !== 0 && (
+          <>
+            <h2>Completed</h2>
+            {state.completed.map((todo) => (
+              <li key={todo.id}>
+                <span>{todo.text}</span>
+                <span onClick={() => dispatch({ type: DEL, payLoad: todo.id })}>
+                  ❌
+                </span>
+                <span onClick={() => dispatch({ type: DEL, payLoad: todo.id })}>
+                  😂👍🏻
+                </span>
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </>
   );
