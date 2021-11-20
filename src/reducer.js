@@ -8,6 +8,7 @@ export const initialState = {
 export const ADD = "add";
 export const DEL = "del";
 export const COMPLETE = "complete";
+export const UNCOMPLETE = "uncomplete";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -27,6 +28,15 @@ function reducer(state, action) {
         ...state,
         toDos: state.toDos.filter((toDo) => action.payLoad !== toDo.id),
         completed: [...state.completed, { ...target }],
+      };
+    case UNCOMPLETE:
+      const aTarget = state.completed.find(
+        (toDo) => action.payLoad !== toDo.id
+      );
+      return {
+        ...state,
+        completed: state.completed.filter((toDo) => action.payLoad !== toDo.id),
+        toDos: [...state.toDos, { ...aTarget }],
       };
     default:
       return;
