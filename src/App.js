@@ -1,41 +1,17 @@
-import React, { useReducer, useState } from "react";
-import reducer, {
-  ADD,
-  COMPLETE,
-  DEL,
-  initialState,
-  UNCOMPLETE,
-} from "./reducer";
+import React, { useState } from "react";
+import Add from "./Add";
+import List from "./List";
+
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [newToDo, setNewTodo] = useState("");
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    dispatch({ type: ADD, payLoad: newToDo });
-    setNewTodo("");
-  };
-
-  const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setNewTodo(value);
-  };
 
   return (
     <>
-      <h1>ADD To Dos</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Write to do"
-          value={newToDo}
-          onChange={onChange}
-        />
-      </form>
-      <ul>
+      <Add />
+      <List>
+
         <h2>To Dos</h2>
         {state.toDos.map((todo) => (
           <li key={todo.id}>
@@ -72,7 +48,7 @@ const App = () => {
             ))}
           </>
         )}
-      </ul>
+      </List>
     </>
   );
 };
