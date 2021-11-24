@@ -12,6 +12,7 @@ const App = () => {
       <Add />
       <List>
         <h1>text</h1>
+        <h2>hello</h2>
         <h2>To Dos</h2>
         {state.toDos.map((todo) => (
           <li key={todo.id}>
