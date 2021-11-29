@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from "react";
-import { ADD } from "./actions";
-import { useDispatch } from "./context";
+import { ADD } from "../actions";
+import { useDispatch } from "../context";
 
 export default () => {
   const [newToDo, setNewTodo] = useState("");
